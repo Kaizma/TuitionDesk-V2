@@ -1,0 +1,13 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/TuitionDesk.Application/TuitionDesk.Application.csproj" />
+    <Project Path="src/TuitionDesk.Desktop/TuitionDesk.Desktop.csproj" />
+    <Project Path="src/TuitionDesk.Domain/TuitionDesk.Domain.csproj" />
+    <Project Path="src/TuitionDesk.Infrastructure/TuitionDesk.Infrastructure.csproj" />
+    <Project Path="src/TuitionDesk.Server/TuitionDesk.Server.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/TuitionDesk.Domain.Tests/TuitionDesk.Domain.Tests.csproj" />
+    <Project Path="tests/TuitionDesk.Server.IntegrationTests/TuitionDesk.Server.IntegrationTests.csproj" />
+  </Folder>
+</Solution>
