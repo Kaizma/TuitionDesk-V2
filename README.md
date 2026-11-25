@@ -126,7 +126,9 @@ configuration to source control.
 
 Before committing, review `git status` and the staged diff. Confirm every added file is intentional,
 generated or local files are not staged, and configuration examples contain no secrets. Use
-`.editorconfig` and `.gitattributes` conventions for formatting and line endings.
+`.gitignore` for generated and local files, and `.editorconfig` and `.gitattributes` for formatting
+and line endings. CI runs `build/verify-repo-hygiene.ps1` as a backstop for tracked artifacts and
+recognizable secret formats; it does not replace reviewing staged changes.
 
 ## Notes
 

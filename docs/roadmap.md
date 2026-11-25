@@ -187,7 +187,7 @@ If the schedule slips, use the product's cut lines in order: bulk enrol → clas
 | 4.7 | Clean-VM test: no .NET installed, network disabled, standard user | Full acceptance script |
 | 4.8 | Upgrade test: install v0.1.0, add data, install v0.1.1 build, verify migration | Requires two builds |
 | 4.9 | Release docs: README (install, data location, backup/restore, known issues), CHANGELOG, tag | |
-| 4.10 | Optional: CI workflow (`build`, `test`, `lint`, `typecheck`) | |
+| 4.10 | CI workflow for repository hygiene, .NET build/tests, and frontend build/tests | Implemented in `.github/workflows/ci.yml` |
 
 **Exit criteria**
 
@@ -223,7 +223,7 @@ If the schedule slips, use the product's cut lines in order: bulk enrol → clas
 - [ ] Dirty-form warning works.
 - [ ] Keyboard-only run-through of the core flows succeeds.
 - [ ] No console errors or unhandled promise rejections in a normal session.
-- [ ] `dotnet build`, `dotnet test`, `pnpm lint`, `pnpm typecheck`, `pnpm test` pass.
+- [ ] `dotnet build TuitionDesk.slnx`, `dotnet test TuitionDesk.slnx`, `pnpm --dir web build`, and `pnpm --dir web test` pass (also gated in CI).
 
 ### Data and operations
 
