@@ -108,15 +108,25 @@ machine.
 ## Repository layout
 
 ```text
-src/TuitionDesk.Domain          Entities, invariants, enums
-src/TuitionDesk.Application     Use cases, DTOs, validators, abstractions
-src/TuitionDesk.Infrastructure  EF Core, SQLite, repositories, backups
-src/TuitionDesk.Server          Minimal API, embedded host, security middleware
-src/TuitionDesk.Desktop         WPF window, WebView2, lifecycle
-web                             React SPA
-build                           Publish script and Inno Setup installer
-docs                            Product, architecture, roadmap
+src/                             .NET application projects, grouped by layer
+tests/                           Domain unit and server integration tests
+web/                             React SPA and its package manifest/lockfile
+docs/                            Product, architecture, and roadmap documentation
+build/                           Publish script and Inno Setup installer
+.github/workflows/               CI workflows
 ```
+
+Within `src`, keep domain rules in `TuitionDesk.Domain`, use cases in
+`TuitionDesk.Application`, persistence and integrations in `TuitionDesk.Infrastructure`, HTTP
+handling in `TuitionDesk.Server`, and the WPF/WebView2 lifecycle in `TuitionDesk.Desktop`. Add tests
+under the matching project in `tests`, and update the relevant docs when behavior or architecture
+decisions change. Keep generated output and local data under ignored output locations such as
+`artifacts/`; do not add build products, databases, package caches, credentials, or machine-specific
+configuration to source control.
+
+Before committing, review `git status` and the staged diff. Confirm every added file is intentional,
+generated or local files are not staged, and configuration examples contain no secrets. Use
+`.editorconfig` and `.gitattributes` conventions for formatting and line endings.
 
 ## Notes
 
