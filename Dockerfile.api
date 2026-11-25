@@ -1,0 +1,26 @@
+# syntax=docker/dockerfile:1
+
+FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
+WORKDIR /src
+
+COPY Directory.Build.props Directory.Packages.props global.json TuitionDesk.slnx ./
+COPY src ./src
+RUN dotnet restore src/TuitionDesk.Server/TuitionDesk.Server.csproj
+RUN dotnet publish src/TuitionDesk.Server/TuitionDesk.Server.csproj \
+    --configuration Release \
+    --no-restore \
+    --output /app/publish \
+    --no-self-contained
+
+FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS runtime
+WORKDIR /app
+RUN apt-get update \
+    && apt-get install --no-install-recommends --yes curl \
+    && rm -rf /var/lib/apt/lists/*
+ENV ASPNETCORE_URLS=http://0.0.0.0:5179 \
+    ASPNETCORE_ENVIRONMENT=Production \
+    TUITIONDESK_DATA_DIR=/data
+COPY --from=build /app/publish .
+VOLUME ["/data"]
+EXPOSE 5179
+ENTRYPOINT ["dotnet", "TuitionDesk.Server.dll"]

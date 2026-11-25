@@ -44,6 +44,7 @@ CI runs the hygiene check and these build/test gates on Windows. There is no `pn
 | Persistence, migration, or backup | `dotnet test TuitionDesk.slnx`; add/extend SQLite-backed tests for the changed recovery or data behavior |
 | Frontend feature, form, or API handling | `pnpm --dir web build` and `pnpm --dir web test` |
 | Desktop startup, packaging, or installer | `dotnet build TuitionDesk.slnx`, then the relevant Windows publish/smoke check; install and upgrade checks are manual |
+| Docker Compose API/web smoke check | `docker compose up --build`, then open `http://localhost:8080` and `/api/health` |
 | Cross-layer or release change | Run the full verification commands above |
 
 Use the full command in the table for routine work; do not run `pnpm typecheck` separately when `pnpm build` already covers it.
@@ -91,4 +92,4 @@ Before implementation, read the relevant product rule and architecture flow, ins
 
 ## Latest agent task
 
-Updated agent workflow with a concise task contract, vertical-slice example, focused check matrix, and a rule to update authoritative Markdown or replace this handoff after every coding task. The roadmap quality checklist now matches the actual CI scripts. No runtime behavior changed.
+Added Compose API/web startup and fixed frontend Corepack resolution by running pnpm inside `web/`, honoring pinned pnpm 10.33.2. Docker ignores nested build outputs and unused repo folders. Verified image build, healthy API with no pending migrations, and HTTP 200 from the UI at `http://localhost:8080`. Compose stack is left running for manual review.

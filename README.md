@@ -67,6 +67,21 @@ dotnet run --project src/TuitionDesk.Desktop
 
 Set `TUITIONDESK_DATA_DIR` before launching to use a throwaway database.
 
+### Docker Compose (API + web UI)
+
+Docker runs the server and production React UI together. It does not run the Windows-only WPF/WebView2
+desktop shell.
+
+```powershell
+docker compose up --build
+# open http://localhost:8080
+# API health: http://localhost:8080/api/health
+```
+
+SQLite data is stored in the named `tuitiondesk-data` volume. Stop the stack with `Ctrl+C` or
+`docker compose down`; the data volume is retained. Use `docker compose down -v` only when you want
+to discard the containerized database.
+
 ## Test
 
 ```powershell
