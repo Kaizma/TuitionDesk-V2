@@ -272,10 +272,10 @@ A task is done when:
 
 | Suite | Runs on | Gate |
 | --- | --- | --- |
-| `dotnet test` | Every change | Must pass |
-| `pnpm typecheck`, `pnpm lint` | Every change | Must pass |
-| `pnpm test` | Every change | Must pass |
-| Optional CI workflow | Push/PR | Build + all tests |
+| `dotnet restore TuitionDesk.slnx`, `dotnet build TuitionDesk.slnx --no-restore`, `dotnet test TuitionDesk.slnx --no-build` | Push/PR on Windows | Must pass |
+| `pnpm --dir web install --frozen-lockfile`, `pnpm --dir web build`, `pnpm --dir web test` | Push/PR on Windows | Must pass |
+
+The GitHub Actions workflow runs these gates on `windows-latest`, matching the WPF desktop target. The frontend build includes TypeScript typechecking. Installer creation and clean-VM/upgrade checks remain manual release checks; there is no frontend lint script configured.
 
 ### Manual smoke script (clean VM, network off)
 
